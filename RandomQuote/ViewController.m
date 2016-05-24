@@ -10,6 +10,7 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *quoteTextView;
+@property (weak, nonatomic) IBOutlet UILabel *countDownLabel;
 
 @end
 
@@ -48,6 +49,7 @@
 }
 
 -(void)nextQuote{
+    _countDownLabel.text = [NSString stringWithFormat:@"Next Quote in: %i", _seconds];
     _quoteTextView.text = [self getRandomQuote];
     _quoteTextView.textColor = [self getRandomColor];
     self.view.backgroundColor = [self getRandomColor];
@@ -56,19 +58,26 @@
 
 -(void)subtractTime {
     _seconds--;
-
+    _countDownLabel.text = [NSString stringWithFormat:@"Next Quote in: %i", _seconds];
     if (_seconds == 0){
-        [self nextQuote];
         _seconds = 2;
+        [self nextQuote];
     }
 }
 
 -(void)appSetup {
-    _seconds = 2;
+    _seconds = 5;
+    _countDownLabel.text = [NSString stringWithFormat:@"Next Quote in: %i", _seconds];
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(subtractTime) userInfo:nil repeats:YES];
     
-    _randomQuotes = @[@"Whoof - Georgia Cotter", @"Quote 2", @"Quote 3", @"Quote 4", @"Quote 5", @"Quote 6", @"Quote 7"];
-    _randomColors = @[[UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor purpleColor]];
+    _randomQuotes = @[@"Whoof - Georgia Cotter",
+                      @"According to most studies, people’s number one fear is public speaking. Number two is death. Death is number two! Does that sound right? That means to the average person, if you go to a funeral, you’re better off in the casket than doing the eulogy. - Jerry Seinfeld",
+                      @"“Cool Whip!” – Stewie Griffin",
+                      @"Does it disturb anyone else that “The Los Angeles Angels” baseball team translates directly to “The The Angels Angels”? - Neil DeGrasse Tyson",
+                      @"People say nothing is impossible, but I do nothing every day - Winnie the Pooh" ,
+                      @"At what age do you think it's appropriate to tell a highway it's adopted? - Zach Galifinaakis",
+                      @"I'm in a glass case of emotion! - Ron Burgundy"];
+    _randomColors = @[[UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor purpleColor], [UIColor grayColor], [UIColor lightGrayColor], [UIColor yellowColor], [UIColor magentaColor]];
 }
 
 
