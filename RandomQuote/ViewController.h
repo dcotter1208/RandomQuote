@@ -13,7 +13,7 @@
 @property(nonatomic, strong) NSArray *randomQuotes;
 @property(nonatomic, strong) NSArray *randomColors;
 @property(nonatomic, strong) NSTimer *timer;
-@property(nonatomic) float seconds;
+@property(nonatomic) int seconds;
 
 @end
 
